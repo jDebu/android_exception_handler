@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 
+import org.acra.annotation.ReportsCrashes;
 
 
 public class ExceptionHandler implements Thread.UncaughtExceptionHandler

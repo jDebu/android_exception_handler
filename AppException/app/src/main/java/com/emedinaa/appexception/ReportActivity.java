@@ -29,7 +29,7 @@ public class ReportActivity extends ActionBarActivity {
     }
 
     private void loadData(){
-        error = getIntent().getExtras().getString("error");
+        //error = getIntent().getExtras().getString("error");
         getSupportActionBar().setTitle("REPORTE DE ERROR");
         tviMessage.setText(error);
 
