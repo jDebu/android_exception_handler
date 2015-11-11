@@ -9,12 +9,15 @@ import org.acra.sender.ReportSender;
 import org.acra.sender.ReportSenderException;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 
 public class ACRAReportSender implements ReportSender {
 
     private String emailUsername ;
     private String emailPassword ;
+    private final String LINE_SEPARATOR = "\n";
+
 
 
 
@@ -38,7 +41,7 @@ public class ACRAReportSender implements ReportSender {
 
         try {
             // specify your recipients and send the email
-            gMailSender.sendMail("CRASH REPORT", reportBody, emailUsername, "j2delgadob@gmail.com, recipient2@gmail.com");
+            gMailSender.sendMail("CRASH REPORT", reportBody, emailUsername, "xtofer16@gmail.com, glupmovil@gmail.com");
         } catch (Exception e) {
             Log.d("Error Sending email", e.toString());
         }
@@ -52,15 +55,47 @@ public class ACRAReportSender implements ReportSender {
         // U can add loads more data using the enum ReportField. See below.
         StringBuilder body = new StringBuilder();
         body
-                .append("Device : " + report.getProperty(ReportField.BRAND) + "-" + report.getProperty(ReportField.PHONE_MODEL))
-                .append("\n")
-                .append("Android Version :" + report.getProperty(ReportField.ANDROID_VERSION))
-                .append("\n")
-                .append("App Version : " + report.getProperty(ReportField.APP_VERSION_CODE))
-                .append("\n")
-                .append("STACK TRACE : \n" + report.getProperty(ReportField.STACK_TRACE));
+            /*.append("Device : " + report.getProperty(ReportField.BRAND) + "-" + report.getProperty(ReportField.PHONE_MODEL))
+            .append("\n")
+            .append("Android Version :" + report.getProperty(ReportField.ANDROID_VERSION))
+            .append("\n")
+            .append("App Version : " + report.getProperty(ReportField.APP_VERSION_CODE))
+            .append("\n")
+            .append("STACK TRACE : \n" + report.getProperty(ReportField.STACK_TRACE))*/
 
-
+            .append("************ CAUSE OF ERROR ************\n\n")
+            .append(report.getProperty(ReportField.STACK_TRACE)+"")
+            .append("\n************ DEVICE INFORMATION ***********\n")
+            .append("Brand: ")
+            .append(Build.BRAND)
+            .append(LINE_SEPARATOR)
+            .append("Device: ")
+            .append(Build.DEVICE)
+            .append(LINE_SEPARATOR)
+            .append("Model: ")
+            .append(Build.MODEL)
+            .append(LINE_SEPARATOR)
+            .append("Id: ")
+            .append(Build.ID)
+            .append(LINE_SEPARATOR)
+            .append("Product: ")
+            .append(Build.PRODUCT)
+            .append(LINE_SEPARATOR)
+            .append("\n************ FIRMWARE ************\n")
+            .append("SDK: ")
+            .append(Build.VERSION.SDK)
+            .append(LINE_SEPARATOR)
+            .append("Release: ")
+            .append(Build.VERSION.RELEASE)
+            .append(LINE_SEPARATOR)
+            .append("Incremental: ")
+            .append(Build.VERSION.INCREMENTAL)
+            .append(LINE_SEPARATOR)
+            .append("\n************ VERSION ************\n")
+            .append("Android Version :" + report.getProperty(ReportField.ANDROID_VERSION))
+            .append(LINE_SEPARATOR)
+            .append("App Version : " + report.getProperty(ReportField.APP_VERSION_CODE));
+            
         return body.toString();
     }
 }

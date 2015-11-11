@@ -55,6 +55,7 @@ public class ExceptionHandler implements Thread.UncaughtExceptionHandler
 		errorReport.append(Build.VERSION.INCREMENTAL);
 		errorReport.append(LINE_SEPARATOR);
 
+
 		Intent intent = new Intent(myContext, activity);
 		intent.putExtra("error", errorReport.toString());
 		myContext.startActivity(intent);
